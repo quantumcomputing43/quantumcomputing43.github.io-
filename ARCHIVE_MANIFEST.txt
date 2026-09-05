@@ -1,0 +1,17 @@
+QUANTUM33 RESEARCH PORTAL V2
+
+Pages:
+- index.html — main site
+- archive.html — central research archive
+- miRNA21.html — miRNA-21 project + files
+- axion.html — AI Quantum Agent / Axion V15 project
+
+Research artifacts:
+- assets/projects/miRNA21/identifiability/fisher_matrices.npz
+- assets/projects/miRNA21/identifiability/protocol_jacobians.npz
+- assets/projects/miRNA21/identifiability/profile_likelihood.csv
+- assets/projects/miRNA21/identifiability/svd_report.json
+- assets/projects/miRNA21/QuantumBiomarker-Framework-v0.1.0.zip
+- assets/projects/axion/v15/AI_QUANTUM_AGENT_V15_RECONSTRUCTED.py
+
+Every project CTA is wired to a real page or real artifact.

@@ -162,3 +162,11 @@ footer { display: flex; justify-content: space-between; padding: 25px 5vw; color
   .ticker { overflow: hidden; white-space: nowrap; justify-content: flex-start; }
   footer { gap: 15px; flex-direction: column; }
 }
+
+.archive-strip{padding:85px 8vw;display:flex;justify-content:space-between;gap:40px;align-items:end;border-bottom:1px solid var(--line);background:rgba(99,230,255,.025)}
+.archive-strip h2{font-size:clamp(42px,6vw,82px);line-height:.88;letter-spacing:-.06em;margin:18px 0}.archive-strip h2 span{color:var(--cyan)}.archive-strip p:not(.section-label){max-width:620px;color:var(--muted);line-height:1.7}.archive-strip .button{flex:none}
+@media(max-width:800px){.archive-strip{display:block}.archive-strip .button{display:inline-block;margin-top:25px}}
+.file-grid{display:grid;grid-template-columns:repeat(2,1fr);border-top:1px solid var(--line)}
+.file-card{padding:30px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);min-height:190px}.file-card:nth-child(even){border-right:0}.file-card .file-kind{font:9px "DM Mono",monospace;color:var(--cyan);letter-spacing:.12em}.file-card h3{font-size:22px;margin:15px 0 10px}.file-card p{color:var(--muted);line-height:1.6;font-size:13px}.file-card a{font:10px "DM Mono",monospace;color:var(--text);display:inline-block;margin-top:12px}.file-card a:hover{color:var(--cyan)}
+.portal-hero{padding:120px 8vw 80px;border-bottom:1px solid var(--line)}.portal-hero h1{font-size:clamp(58px,9vw,125px);margin:25px 0 20px}.portal-hero h1 em{color:var(--cyan);font-style:normal}.portal-hero .lead{max-width:700px;color:var(--muted);font-size:17px;line-height:1.8}.portal-section{padding:90px 8vw;border-bottom:1px solid var(--line)}.portal-section h2{font-size:clamp(38px,5vw,70px);line-height:.9;letter-spacing:-.05em;margin:0 0 35px}.portal-section h2 span{color:var(--cyan)}.archive-note{border:1px solid var(--line);padding:20px;margin-bottom:30px;color:var(--muted);line-height:1.7}.status{font:9px "DM Mono",monospace;color:var(--gold);letter-spacing:.12em}
+@media(max-width:800px){.file-grid{grid-template-columns:1fr}.file-card{border-right:0}}
