@@ -1,0 +1,24 @@
+QUANTUM33 — CLEAN REPOSITORY V1
+
+Website pages:
+- index.html — main homepage
+- miRNA21.html — miRNA-21 quantum sensing project
+- axion.html — AI Quantum Agent / Axion V15 project
+- archive.html — central research archive
+
+Website assets:
+- style.css
+- script.js
+- assets/media/*
+
+Research artifacts:
+- assets/projects/miRNA21/identifiability/fisher_matrices.npz
+- assets/projects/miRNA21/identifiability/protocol_jacobians.npz
+- assets/projects/miRNA21/identifiability/profile_likelihood.csv
+- assets/projects/miRNA21/identifiability/svd_report.json
+- assets/projects/miRNA21/QuantumBiomarker-Framework-v0.1.0.zip
+- assets/projects/miRNA21/framework/*
+- assets/projects/axion/v15/AI_QUANTUM_AGENT_V15_RECONSTRUCTED.py
+
+This package is intentionally organized as one clean repository.
+No nested website ZIP is required.
