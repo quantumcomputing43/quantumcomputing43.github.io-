@@ -1,0 +1,72 @@
+{
+  "project_id": "MIRNA21_FORENSIC_AUDIT",
+  "case_id": "MIRNA21_REPRESENTATION_INFORMATION_RETENTION",
+  "controller": "forensic_scientific_audit",
+  "executor": "simulation_matrix",
+  "current_state": "INCONCLUSIVE-BLOCKED",
+  "eligible_next_operation": "E0_PROVENANCE_RESOLUTION",
+  "scientific_execution_allowed": false,
+  "experiments": [
+    {
+      "id": "E0_PROVENANCE_RESOLUTION",
+      "status": "ELIGIBLE_NOW",
+      "purpose": "recover exact R8D/V1 mapping/null provenance",
+      "stop_if": "any required provenance field remains unresolved"
+    },
+    {
+      "id": "E1_V1_LEVEL_10",
+      "status": "BLOCKED_BY_E0",
+      "purpose": "contract sanity and null/leakage validity"
+    },
+    {
+      "id": "E2_V1_SCALE",
+      "status": "BLOCKED_BY_E1",
+      "levels": [
+        100,
+        1000,
+        10000,
+        100000,
+        1000000
+      ]
+    },
+    {
+      "id": "E3_V1_ROBUSTNESS_GRID",
+      "status": "BLOCKED_BY_E1",
+      "grid": {
+        "d_s": [
+          0.5,
+          0.75,
+          1
+        ],
+        "d_w": [
+          0.1,
+          0.2,
+          0.3
+        ]
+      }
+    },
+    {
+      "id": "E4_V5_HISTORICAL_REPRODUCTION",
+      "status": "BLOCKED_BY_V5_SOURCE",
+      "purpose": "reproduce unchanged before adversarial attacks"
+    },
+    {
+      "id": "E5_WHEL_VALIDATION",
+      "status": "HOLD",
+      "purpose": "authoritative Endpoints.csv/version provenance"
+    }
+  ],
+  "forbidden_adaptations": [
+    "invent R8D coefficients",
+    "invent dimensions or feature order",
+    "posthoc metric/threshold changes",
+    "use V3/V4/V5 to fill V1 gaps",
+    "substitute WHEL endpoints"
+  ],
+  "terminal_states": [
+    "SCIENTIFIC-READY",
+    "SCIENTIFIC-FAIL",
+    "NON-IDENTIFIABLE",
+    "INCONCLUSIVE-BLOCKED"
+  ]
+}
