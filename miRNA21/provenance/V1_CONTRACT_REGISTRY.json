@@ -1,0 +1,18 @@
+{
+  "project_id": "MIRNA21_FORENSIC_AUDIT",
+  "case_id": "MIRNA21_REPRESENTATION_INFORMATION_RETENTION",
+  "registry_date": "2026-09-21",
+  "execution_gate": "CLOSED",
+  "contracts": [
+    {"id":"C01_DIMENSIONS","state":"BLOCKED","source_required":"exact registered frozen representation artifacts"},
+    {"id":"C02_GENERATIVE_MODEL","state":"BOUND_IN_CURRENT_MASTER","source":"MIRNA21_MATRIX_V1_MASTER_REPAIR_AND_FREEZE_2026-09-20.json","verification":"must be checked against authoritative checkpoint before execution"},
+    {"id":"C03_METRIC","state":"BOUND_IN_CURRENT_MASTER","source":"MIRNA21_MATRIX_V1_MASTER_REPAIR_AND_FREEZE_2026-09-20.json","verification":"must be checked against authoritative checkpoint before execution"},
+    {"id":"C04_THRESHOLD","state":"BOUND_IN_CURRENT_MASTER","source":"MIRNA21_MATRIX_V1_MASTER_REPAIR_AND_FREEZE_2026-09-20.json","verification":"must be checked against authoritative checkpoint before execution"},
+    {"id":"C05_SEEDS","state":"BOUND_IN_CURRENT_MASTER","source":"MIRNA21_MATRIX_V1_MASTER_REPAIR_AND_FREEZE_2026-09-20.json","verification":"must be checked against authoritative checkpoint before execution"},
+    {"id":"C06_EXECUTABLE","state":"BLOCKED","source_required":"uniquely registered executable V1 implementation"},
+    {"id":"C07_PROVENANCE","state":"BLOCKED","source_required":"exact R8D artifact/version/hash/feature order/transformation lineage"},
+    {"id":"C08_NULL_GENERATION","state":"BLOCKED","source_required":"one exact R8D null implementation and scope"},
+    {"id":"WHEL_ENDPOINT_PROVENANCE","state":"HOLD","source_required":"authoritative Endpoints.csv/version"}
+  ],
+  "policy": "No scientific execution while a required contract is BLOCKED."
+}
