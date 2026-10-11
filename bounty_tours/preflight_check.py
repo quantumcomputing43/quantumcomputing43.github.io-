@@ -25,8 +25,8 @@ def check_dns(host: str) -> dict:
         return {"status": "PASS" if addresses else "FAIL", "addresses": addresses}
     except socket.gaierror as exc:
         return {"status": "FAIL", "error": str(exc), "addresses": []}
-    except Exception as exc:  # preserve unexpected environment/network failures
-        return {"status": "ERROR", "error": f"{type(exc).__name__}: {exc}"}
+    except Exception as exc:
+        return {"status": "ERROR", "error": f"{type(exc).__name__}: {exc}", "addresses": []}
 
 
 def check_tls(host: str) -> dict:
@@ -61,9 +61,8 @@ def check_https(host: str) -> dict:
                 "content_type": response.headers.get("Content-Type"),
             }
     except urllib.error.HTTPError as exc:
-        # An HTTP response proves the server answered, but not that the site works.
         return {
-            "status": "HTTP_RESPONSE",
+            "status": "HTTP_ERROR",
             "http_status": exc.code,
             "final_url": exc.geturl(),
             "error": str(exc),
@@ -74,32 +73,44 @@ def check_https(host: str) -> dict:
 
 def audit_domain(host: str) -> dict:
     dns = check_dns(host)
-    # Only probe TLS/HTTPS when DNS resolves; avoid redundant failures.
-    if dns.get("status") == "PASS":
-        tls = check_tls(host)
-        https = check_https(host)
-    else:
-        tls = {"status": "BLOCKED", "reason": "DNS did not resolve"}
-        https = {"status": "BLOCKED", "reason": "DNS did not resolve"}
-    return {"domain": host, "dns": dns, "tls": tls, "https": https}
+    if dns.get("status") != "PASS":
+        return {
+            "domain": host,
+            "dns": dns,
+            "tls": {"status": "BLOCKED", "reason": "DNS did not resolve"},
+            "https": {"status": "BLOCKED", "reason": "DNS did not resolve"},
+            "technical_status": "FAIL",
+        }
+
+    tls = check_tls(host)
+    https = check_https(host)
+    passed = tls.get("status") == "PASS" and https.get("status") == "PASS"
+    return {
+        "domain": host,
+        "dns": dns,
+        "tls": tls,
+        "https": https,
+        "technical_status": "PASS" if passed else "FAIL",
+    }
 
 
 def main() -> int:
+    domains = [audit_domain(host) for host in DOMAINS]
+    technical_pass = any(item["technical_status"] == "PASS" for item in domains)
     report = {
         "audit": "BOUNTY_TOURS_READ_ONLY_PREFLIGHT_V1",
         "timestamp_utc": datetime.now(timezone.utc).isoformat(),
+        "overall_technical_status": "PASS" if technical_pass else "FAIL",
         "network_mutations": False,
         "messages_sent": False,
         "interpretation_limit": (
             "Transport checks do not establish company operating status, ownership, "
             "commercial demand, or permission to contact."
         ),
-        "domains": [audit_domain(host) for host in DOMAINS],
+        "domains": domains,
     }
     print(json.dumps(report, indent=2, sort_keys=True))
-    return 0 if any(
-        item["dns"].get("status") == "PASS" for item in report["domains"]
-    ) else 2
+    return 0 if technical_pass else 2
 
 
 if __name__ == "__main__":
