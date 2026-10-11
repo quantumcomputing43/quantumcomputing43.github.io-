@@ -1,0 +1,42 @@
+{
+  "contract_id": "Q33_BOUNTY_TOURS_PREFLIGHT_V1",
+  "project": "Bounty Tours commercial discovery",
+  "target": {
+    "company": "BOUNTY TOURS",
+    "city": "Agadir",
+    "domains": ["bounty-tours.com", "www.bounty-tours.com"]
+  },
+  "scope": "Read-only technical preflight before commercial outreach",
+  "hypotheses": {
+    "H0": "No reliable current technical evidence is available; classify as HOLD_RESEARCH.",
+    "H1": "At least one target hostname resolves and completes verified TLS and an HTTPS request.",
+    "H2": "DNS, TLS, redirect, or HTTP behavior is inconsistent or fails; classify the affected check without inferring why.",
+    "H3": "Technical reachability is not evidence that the company is operating, that a decision-maker is reachable, or that a commercial offer is wanted."
+  },
+  "baseline": {
+    "required_checks": ["DNS", "TLS certificate validation", "HTTPS response"],
+    "network_mutations_allowed": false,
+    "outbound_company_messages_allowed": false,
+    "credentials_or_secrets_required": false
+  },
+  "pass_fail": {
+    "technical_pass": "At least one domain resolves, verified TLS succeeds, and HTTPS returns an HTTP response; record exact host, status, and timestamp.",
+    "technical_fail": "No domain completes the required checks; retain error evidence and do not alter DNS or hosting.",
+    "hold_research": "Evidence is incomplete, inconsistent, stale, or only from third-party listings.",
+    "commercial_pass": "Only after a human confirms the company contact and explicitly authorizes the offer; separate from technical PASS."
+  },
+  "provenance": {
+    "source_code": "bounty_tours/preflight_check.py",
+    "observed_at_utc": "generated at runtime",
+    "raw_output": "operator must preserve the JSON output with the run record"
+  },
+  "guardrails": [
+    "No DNS or hosting changes.",
+    "No automated email, forms, or other outreach.",
+    "Do not interpret HTTP 200 as proof the business is active.",
+    "Do not interpret DNS/TLS failure as proof the company is closed.",
+    "Do not use old third-party contact records without verification.",
+    "No post-hoc changes to the frozen checks or pass criteria."
+  ],
+  "status_before_execution": "NOT_RUN"
+}
