@@ -3,12 +3,12 @@ from __future__ import annotations
 import re
 from typing import Any
 
-EMAIL_RE = re.compile(r"^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$")
+EMAIL_RE = re.compile(r"^[^\s@]+@[^\s@]+\.[^\s@]+$")
 
 
 def validate_profile(profile: dict[str, Any]) -> list[str]:
-    errors = []
-    if not profile.get("full_name", "").strip():
+    errors: list[str] = []
+    if not str(profile.get("full_name", "")).strip():
         errors.append("full_name is required")
     years = profile.get("years_experience")
     if years is not None and (not isinstance(years, int) or years < 0 or years > 80):
@@ -18,7 +18,7 @@ def validate_profile(profile: dict[str, Any]) -> list[str]:
     contact = profile.get("contact", {})
     if not isinstance(contact, dict):
         errors.append("contact must be an object")
-    elif contact.get("email") and not EMAIL_RE.match(contact["email"].strip()):
+    elif contact.get("email") and not EMAIL_RE.match(str(contact["email"]).strip()):
         errors.append("contact.email is invalid")
     return errors
 
@@ -27,23 +27,32 @@ def render_cv_markdown(profile: dict[str, Any]) -> str:
     errors = validate_profile(profile)
     if errors:
         raise ValueError("; ".join(errors))
+
     def show(value: Any, fallback: str = "[To be completed]") -> str:
         return str(value).strip() if value not in (None, "", []) else fallback
+
     lines = [
-        f"# {show(profile.get(chr(102)+chr(117)+chr(108)+chr(108)+chr(95)+chr(110)+chr(97)+chr(109)+chr(101)))}",
+        f"# {show(profile.get('full_name'))}",
         f"**{show(profile.get('professional_title'), 'Experienced Barber')}**",
-        "", f"Location: {show(profile.get('base_location'))}",
+        "",
+        f"Location: {show(profile.get('base_location'))}",
         f"Email: {show(profile.get('contact', {}).get('email'))}",
         f"Phone: {show(profile.get('contact', {}).get('phone'))}",
-        "", "## Professional Profile", show(profile.get("professional_summary")),
-        "", "## Experience",
+        "",
+        "## Professional Profile",
+        show(profile.get("professional_summary")),
+        "",
+        "## Experience",
     ]
     history = profile.get("employment_history") or []
     if history:
         for job in history:
-            lines.extend([f"### {show(job.get('role'))} — {show(job.get('employer'))}",
-                          f"{show(job.get('start_date'))} – {show(job.get('end_date'), 'Present / confirm')}",
-                          show(job.get('description')), ""])
+            lines.extend([
+                f"### {show(job.get('role'))} — {show(job.get('employer'))}",
+                f"{show(job.get('start_date'))} – {show(job.get('end_date'), 'Present / confirm')}",
+                show(job.get("description")),
+                "",
+            ])
     else:
         lines.append("[Add employers, locations, dates, and verifiable responsibilities.]")
     lines.extend(["", "## Barbering Skills"])
@@ -55,10 +64,11 @@ def render_cv_markdown(profile: dict[str, Any]) -> str:
     lines.extend(["", "## Portfolio"])
     lines.extend([f"- {x}" for x in (profile.get("portfolio_links") or [])] or ["- [Optional portfolio link]"])
     lines.extend(["", "## Availability and Work Authorization", show(profile.get("availability")), show(profile.get("work_authorization"), "Not confirmed")])
-    return "\\n".join(lines).strip() + "\\n"
+    return "\n".join(lines).strip() + "\n"
 
 
 def score_role(profile: dict[str, Any], role: dict[str, Any]) -> dict[str, Any]:
+    """Return an explainable score, not a probability of being hired."""
     skills = {str(x).strip().casefold() for x in profile.get("skills", [])}
     required = {str(x).strip().casefold() for x in role.get("required_skills", [])}
     matched = sorted(skills & required)
@@ -67,12 +77,16 @@ def score_role(profile: dict[str, Any], role: dict[str, Any]) -> dict[str, Any]:
     region = str(role.get("region", "")).casefold()
     region_score = 20 if region and any(x in region or region in x for x in targets) else 0
     url_score = 20 if str(role.get("official_job_url", "")).startswith("https://") else 0
-    return {"score": round(min(100, skill_score + region_score + url_score), 1),
-            "matched_skills": matched, "unmatched_required_skills": sorted(required - skills),
-            "interpretation": "rule-based fit score, not hiring probability"}
+    return {
+        "score": round(min(100, skill_score + region_score + url_score), 1),
+        "matched_skills": matched,
+        "unmatched_required_skills": sorted(required - skills),
+        "interpretation": "rule-based fit score, not hiring probability",
+    }
 
 
 def draft_application_email(profile: dict[str, Any], company: dict[str, Any]) -> str:
+    """Prepare a personalized draft for human review; never send email."""
     errors = validate_profile(profile)
     if errors:
         raise ValueError("; ".join(errors))
@@ -82,17 +96,25 @@ def draft_application_email(profile: dict[str, Any], company: dict[str, Any]) ->
         raise ValueError("company_name is required")
     name = str(profile.get("full_name", "")).strip()
     years = profile.get("years_experience")
-    experience = f"I have {years} years of barbering experience." if isinstance(years, int) else "I would be glad to share my experience and portfolio."
+    experience = (
+        f"I have {years} years of barbering experience."
+        if isinstance(years, int)
+        else "I would be glad to share my experience and portfolio."
+    )
     skills = ", ".join(profile.get("skills", [])[:5]) or "professional barbering"
-    return (f"Subject: Application for {role} — {name}\\n\\nDear {company_name} Recruitment Team,\\n\\n"
-            f"I am contacting you to ask whether you are considering candidates for a {role} position. "
-            f"{experience} My relevant skills include {skills}.\\n\\n"
-            "I can provide my CV and portfolio and would welcome the opportunity to discuss the role and any work-authorization requirements.\\n\\n"
-            f"Thank you for your time.\\nKind regards,\\n{name}")
+    return (
+        f"Subject: Application for {role} — {name}\n\n"
+        f"Dear {company_name} Recruitment Team,\n\n"
+        f"I am contacting you to ask whether you are considering candidates for a {role} position. "
+        f"{experience} My relevant skills include {skills}.\n\n"
+        "I can provide my CV and portfolio and would welcome the opportunity to discuss the role "
+        "and any work-authorization requirements.\n\n"
+        f"Thank you for your time.\nKind regards,\n{name}"
+    )
 
 
 def is_contactable(company: dict[str, Any]) -> tuple[bool, str]:
-    """Fail closed; an eligible record still requires human review before contacting."""
+    """Fail closed; eligibility still requires human review before contact."""
     if company.get("do_not_contact") is True:
         return False, "blocked: do_not_contact"
     if not str(company.get("company_name", "")).strip():
