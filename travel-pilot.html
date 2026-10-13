@@ -42,17 +42,21 @@ a{color:inherit}.wrap{max-width:1120px;margin:auto;padding:0 24px}.nav{display:f
 <section class="wrap section" id="request">
 <div class="form-grid">
 <div><p class="eyebrow en">Tell us a little</p><p class="eyebrow fr">Parlons de votre séjour</p><h2 class="en">Let’s plan something that fits.</h2><h2 class="fr">Créons un séjour qui vous ressemble.</h2><p class="section-intro en">Send a no-obligation enquiry. We’ll review your preferences and reply with next steps or questions.</p><p class="section-intro fr">Envoyez une demande sans engagement. Nous étudierons vos envies et vous répondrons avec les prochaines étapes.</p><div class="notice en">Pilot project: submitting this form is a request for information, not a booking confirmation. Prices, availability and providers must be confirmed separately.</div><div class="notice fr">Projet pilote : ce formulaire est une demande d’information, pas une réservation confirmée. Les prix, disponibilités et prestataires doivent être confirmés séparément.</div></div>
-<form class="form-panel" id="leadForm">
-<label for="name" class="en">Your name *</label><label for="name" class="fr">Votre nom *</label><input id="name" name="name" autocomplete="name" required maxlength="100" placeholder="Alex Martin">
-<label for="email" class="en">Email address *</label><label for="email" class="fr">Adresse e-mail *</label><input id="email" name="email" type="email" autocomplete="email" required maxlength="160" placeholder="you@example.com">
-<label for="dates" class="en">Approximate travel dates</label><label for="dates" class="fr">Dates approximatives</label><input id="dates" name="dates" maxlength="100" placeholder="e.g. 12–18 November">
-<label for="people" class="en">Number of travellers</label><label for="people" class="fr">Nombre de voyageurs</label><select id="people" name="people"><option>1</option><option selected>2</option><option>3–4</option><option>5–8</option><option>9+</option></select>
-<label for="budget" class="en">Budget per person (optional)</label><label for="budget" class="fr">Budget par personne (facultatif)</label><select id="budget" name="budget"><option value="Not specified">Not specified / Non précisé</option><option>Under €100</option><option>€100–€250</option><option>€250–€500</option><option>€500+</option><option>Flexible</option></select>
-<label for="interests" class="en">What would you love to do?</label><label for="interests" class="fr">Qu’aimeriez-vous faire ?</label><textarea id="interests" name="interests" maxlength="1500" placeholder="Surf, nature, local food, shopping, camping…"></textarea>
-<label class="small"><input type="checkbox" id="consent" required style="width:auto;margin:0 7px 0 0"> <span class="en">I agree to be contacted about this enquiry. *</span><span class="fr">J’accepte d’être contacté(e) au sujet de cette demande. *</span></label>
-<button class="btn" type="submit"><span class="en">Send trip enquiry ↗</span><span class="fr">Envoyer ma demande ↗</span></button>
-<p class="small en">Your email app will open with the details filled in. Nothing is sent until you press Send in your email app.</p><p class="small fr">Votre application e-mail s’ouvrira avec les détails. Rien n’est envoyé avant votre validation dans cette application.</p>
-</form>
+<div class="form-panel tally-embed">
+  <iframe
+    src="https://tally.so/r/1AZy9M?transparentBackground=1"
+    title="Plan Your Morocco Experience — inquiry form"
+    loading="lazy"
+    width="100%"
+    height="850"
+    frameborder="0"
+    marginheight="0"
+    marginwidth="0"
+    style="width:100%;height:850px;border:0;border-radius:12px;background:transparent;"
+    allow="clipboard-write">
+  </iframe>
+  <p class="small">Your inquiry is submitted through Tally. Availability, prices and arrangements are confirmed separately.</p>
+</div>
 </div>
 </section>
 </main>
@@ -61,7 +65,7 @@ a{color:inherit}.wrap{max-width:1120px;margin:auto;padding:0 24px}.nav{display:f
 const enBtn=document.getElementById('enBtn'),frBtn=document.getElementById('frBtn');
 function setLang(lang){document.documentElement.lang=lang;document.querySelectorAll('.en').forEach(e=>e.style.display=lang==='en'?'':'none');document.querySelectorAll('.fr').forEach(e=>e.style.display=lang==='fr'?'':'none');enBtn.style.fontWeight=lang==='en'?'800':'400';frBtn.style.fontWeight=lang==='fr'?'800':'400';}
 enBtn.addEventListener('click',()=>setLang('en'));frBtn.addEventListener('click',()=>setLang('fr'));setLang('en');document.getElementById('year').textContent=new Date().getFullYear();
-document.getElementById('leadForm').addEventListener('submit',function(e){e.preventDefault();const f=new FormData(this);const body=['New travel enquiry — Morocco Trip Studio','Name: '+f.get('name'),'Email: '+f.get('email'),'Dates: '+(f.get('dates')||'Not specified'),'Travellers: '+f.get('people'),'Budget per person: '+f.get('budget'),'Interests: '+(f.get('interests')||'Not specified'),'Contact consent: Yes'].join('\n');const url='mailto:veltrix@agentmail.to?subject='+encodeURIComponent('New Morocco trip enquiry — '+f.get('name'))+'&body='+encodeURIComponent(body);window.location.href=url;});
+
 </script>
 </body>
 </html>
