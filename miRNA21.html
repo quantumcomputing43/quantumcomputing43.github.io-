@@ -1,1 +1,100 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Quantum33 miRNA-21 quantum sensing project and research files"><title>QUANTUM33 — miRNA-21 Project</title><link rel="stylesheet" href="style.css"></head><body><div class="noise"></div><div class="grid"></div><header class="nav"><a class="brand" href="index.html"><span class="brand-mark">Q<span>33</span></span><span><strong>QUANTUM33</strong><small>PROJECT / 01</small></span></a><nav><a href="index.html">HOME</a><a href="#model">MODEL</a><a href="#identifiability">AUDIT</a><a href="#files">FILES</a></nav><a class="nav-cta" href="archive.html">ARCHIVE <span>↗</span></a></header><main><section class="portal-hero"><p class="eyebrow"><span></span> PROJECT 01 / QUANTUM BIOMARKER</p><h1>miRNA-21<br><em>QUANTUM SENSING.</em></h1><p class="lead">An effective computational and experimental framework for a cancer-related biomarker, with identifiability treated as a first-class scientific question.</p></section><section class="portal-section" id="model"><p class="section-label">01 / MODEL</p><h2>FROM BINDING TO A <span>MEASURABLE SHIFT.</span></h2><div class="detail-grid"><div class="equations big"><div>f(C,K<sub>d</sub>) = C / (C + K<sub>d</sub>)</div><div>δω = g · f</div><div>Γ<sub>φ</sub> = Γ<sub>0</sub> + g²τ<sub>c</sub>f(1−f)</div></div><div><p>Parameter vector:</p><p class="mono">θ = (ln C, ln K<sub>d</sub>, ln g, Γ<sub>0</sub>, η)</p><div class="warning"><b>LIMITATION</b><br>g, τ<sub>c</sub>, the source spectrum and readout model require experimental justification or validation before biological claims are made.</div></div></div></section><section class="portal-section" id="identifiability"><p class="section-label">02 / IDENTIFIABILITY AUDIT</p><h2>THE MODEL HAS A <span>DEGENERACY.</span></h2><div class="audit-panel"><div class="metric"><strong>experimental rank</strong><span>3 / 5</span></div><div class="metric"><strong>condition number</strong><span>2.302 × 10<sup>17</sup></span></div><div class="metric"><strong>shots / setting</strong><span>200,000</span></div><p>Two structural null directions were identified. The current C/(C+K<sub>d</sub>) binding symmetry structurally confounds C and K<sub>d</sub> unless an independent biochemical dependence is added.</p><a href="assets/projects/miRNA21/identifiability/svd_report.json">OPEN RAW SVD REPORT →</a></div></section><section class="portal-section" id="files"><p class="section-label">03 / ACTUAL RESEARCH FILES</p><h2>READ IT. <span>DOWNLOAD IT.</span></h2><div class="archive-note"><span class="status">PUBLIC RESEARCH ARTIFACTS</span><br>These are the actual files behind the analysis — not screenshots or placeholder buttons.</div><div class="file-grid"><article class="file-card"><span class="file-kind">DATA / NPZ</span><h3>Fisher Matrices</h3><p>Numerical Fisher-information artifacts used in the identifiability audit.</p><a href="assets/projects/miRNA21/identifiability/fisher_matrices.npz" download>DOWNLOAD FILE ↓</a></article><article class="file-card"><span class="file-kind">DATA / NPZ</span><h3>Protocol Jacobians</h3><p>Protocol sensitivity artifacts for the sensing settings.</p><a href="assets/projects/miRNA21/identifiability/protocol_jacobians.npz" download>DOWNLOAD FILE ↓</a></article><article class="file-card"><span class="file-kind">DATA / CSV</span><h3>Profile Likelihood</h3><p>Profile-likelihood output from the inference workflow.</p><a href="assets/projects/miRNA21/identifiability/profile_likelihood.csv" download>DOWNLOAD CSV ↓</a></article><article class="file-card"><span class="file-kind">REPORT / JSON</span><h3>SVD Audit Report</h3><p>Rank, singular values, condition number and structural null-space diagnostics.</p><a href="assets/projects/miRNA21/identifiability/svd_report.json" download>DOWNLOAD REPORT ↓</a></article><article class="file-card"><span class="file-kind">FRAMEWORK / ZIP</span><h3>Quantum Biomarker Framework v0.1.0</h3><p>Complete baseline package with README, Python modules, tests and requirements.</p><a href="assets/projects/miRNA21/QuantumBiomarker-Framework-v0.1.0.zip" download>DOWNLOAD COMPLETE PACKAGE ↓</a></article></div></section><section class="portal-section"><p class="status">SCIENTIFIC STANDARD</p><h2>SIMULATION IS NOT <span>DISCOVERY.</span></h2><p class="lead">Every promising result stays labeled as a model result until the physical transduction, nuisance structure and experimental readout survive independent validation.</p></section></main><footer><span>© 2026 QUANTUM33</span><span>miRNA-21 / v0.1.0</span><span>QUESTION. SIMULATE. VALIDATE.</span></footer></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Quantum33 miRNA-21 research: information retention, representation audits, and a separate quantum-sensing model. Computational findings and limitations are reported transparently.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="miRNA-21 Research | QUANTUM33">
+  <meta property="og:description" content="A forensic computational audit of miRNA-21 representations, information retention, and identifiability. Simulation is not biological validation.">
+  <meta property="og:url" content="https://quantumcomputing43.github.io/quantumcomputing43.github.io-/miRNA21.html">
+  <meta name="twitter:card" content="summary">
+  <title>miRNA-21 Research — QUANTUM33</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="noise"></div><div class="grid"></div>
+  <header class="nav">
+    <a class="brand" href="index.html"><span class="brand-mark">Q<span>33</span></span><span><strong>QUANTUM33</strong><small>miRNA-21 / RESEARCH AUDIT</small></span></a>
+    <nav><a href="index.html">HOME</a><a href="#retention">RETENTION</a><a href="#sensing">SENSING</a><a href="#limits">LIMITATIONS</a></nav>
+    <a class="nav-cta" href="https://github.com/quantumcomputing43/quantumcomputing43.github.io-">SOURCE REPOSITORY ↗</a>
+  </header>
+  <main>
+    <section class="portal-hero">
+      <p class="eyebrow"><span></span> QUANTUM33 / COMPUTATIONAL RESEARCH</p>
+      <h1>miRNA-21<br><em>INFORMATION & SENSING.</em></h1>
+      <p class="lead">Two distinct research questions are kept separate: whether compressed molecular representations retain predefined biological-state information, and whether a proposed sensing model can identify its parameters. Results from computation are not presented as biological or clinical validation.</p>
+      <p class="warning"><strong>Evidence status:</strong> computational audit in progress. No claim of a validated diagnostic, clinical utility, or demonstrated quantum advantage is made here.</p>
+    </section>
+
+    <section class="portal-section" id="retention">
+      <p class="section-label">01 / REPRESENTATION & INFORMATION RETENTION</p>
+      <h2>WHAT INFORMATION <span>SURVIVES COMPRESSION?</span></h2>
+      <p class="lead">The core question is whether a smaller molecular representation retains enough information to distinguish predefined biological or functional states without leaking labels or encoding the answer into the representation.</p>
+      <div class="detail-grid">
+        <div>
+          <h3>Representations under comparison</h3>
+          <ul>
+            <li><strong>R0_full:</strong> full RNA benchmark reference.</li>
+            <li><strong>PCA25:</strong> unsupervised 25-component compression; previous project notes report strong PAM50 discrimination but loss of relevant miR-21 signal.</li>
+            <li><strong>R3_miR21_only:</strong> miR-21-only representation.</li>
+            <li><strong>R8D_frozen:</strong> frozen 8-dimensional multi-task PLS candidate; promising computationally, not established as biologically minimal.</li>
+            <li><strong>R8D_null:</strong> shuffled/permuted control intended to break biological alignment.</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Audit contract</h3>
+          <p>Compare the frozen representations with predefined endpoints, nulls, and controls. Do not refit the candidate on validation/test data, select seeds after seeing results, or add variables post hoc.</p>
+          <p class="mono">B → M → X → R(X) → Y</p>
+          <p>Biological state → molecular processing/context → measured RNA → representation → predefined endpoint.</p>
+        </div>
+      </div>
+      <div class="audit-panel">
+        <p class="status">KNOWN LIMITATION / INPUT BLOCKER</p>
+        <h3>External endpoint validation is not cleared</h3>
+        <p>The correct 2010–2015 PAM50/mortality endpoint file is still a documented blocker in the project record. Until provenance, follow-up, event/censoring definitions, sample IDs, and compatibility with the expression data are verified, survival validation must remain closed.</p>
+        <p><strong>Interpretation rule:</strong> prediction is not mechanism; correlation is not causation; simulation is not biological validation.</p>
+      </div>
+    </section>
+
+    <section class="portal-section" id="sensing">
+      <p class="section-label">02 / SEPARATE WORKSTREAM — SENSING MODEL</p>
+      <h2>BINDING IS NOT <span>IDENTIFIABILITY.</span></h2>
+      <div class="detail-grid">
+        <div class="equations big">
+          <div>f(C, K<sub>d</sub>) = C / (C + K<sub>d</sub>)</div>
+          <div>δω = g · f</div>
+          <div>Γ<sub>φ</sub> = Γ<sub>0</sub> + g²τ<sub>c</sub>f(1−f)</div>
+        </div>
+        <div>
+          <p>The binding expression is a baseline model. Parameters such as coupling, correlation time, source spectrum, and readout model require independent experimental justification.</p>
+          <p><strong>Known structural issue:</strong> concentration C and dissociation constant K<sub>d</sub> are confounded through the ratio C/K<sub>d</sub> in this occupancy expression unless independent information or a distinct measurement breaks the symmetry.</p>
+        </div>
+      </div>
+      <div class="audit-panel">
+        <p class="status">PREVIOUS MODEL AUDIT — NOT A NEW EXPERIMENT</p>
+        <p>The existing project page reported Fisher-information rank 3/5 and condition number approximately 2.302 × 10<sup>17</sup>. These values indicate severe ill-conditioning in that reported model configuration; the underlying raw artifacts must be recovered and checked before treating the exact figures as independently reproducible.</p>
+        <p>Increasing Monte Carlo sample count alone cannot repair structural non-identifiability.</p>
+      </div>
+    </section>
+
+    <section class="portal-section" id="limits">
+      <p class="section-label">03 / EVIDENCE, LIMITS & REPRODUCIBILITY</p>
+      <h2>NO CLAIM WITHOUT <span>A TRACEABLE ARTIFACT.</span></h2>
+      <div class="file-grid">
+        <article class="file-card"><span class="file-kind">EVIDENCE RULE</span><h3>Separate claims</h3><p>Computational performance, mechanistic interpretation, biological validation, and clinical utility are four different levels of evidence.</p></article>
+        <article class="file-card"><span class="file-kind">REPRODUCIBILITY</span><h3>Freeze the protocol</h3><p>Record dataset provenance, sample IDs, code/version, seed, representation transform, metric, controls, threshold, and stopping rules before execution.</p></article>
+        <article class="file-card"><span class="file-kind">NULL & CONTROLS</span><h3>Try to falsify</h3><p>Use shuffled-label or representation controls, nuisance-only alternatives, perturbation tests, and independent seeds. A valid result may be inconclusive or a failure.</p></article>
+        <article class="file-card"><span class="file-kind">SOURCE</span><h3>Project repository</h3><p>Inspect the public-facing website source. Download links for raw artifacts will be restored only after the real files and their provenance are verified.</p><a href="https://github.com/quantumcomputing43/quantumcomputing43.github.io-">OPEN REPOSITORY ↗</a></article>
+      </div>
+    </section>
+
+    <section class="portal-section">
+      <p class="status">CURRENT SCIENTIFIC POSITION</p>
+      <h2>A CANDIDATE IS NOT <span>A DISCOVERY.</span></h2>
+      <p class="lead">The representation-retention question remains a controlled computational audit, and the sensing model has a documented identifiability limitation. The project should advance only when missing data contracts and source artifacts are verified. No clinical recommendation follows from this work.</p>
+    </section>
+  </main>
+  <footer><span>© 2026 QUANTUM33</span><span>miRNA-21 / COMPUTATIONAL AUDIT</span><span>QUESTION. TEST. FALSIFY. REPRODUCE.</span></footer>
+</body>
+</html>
